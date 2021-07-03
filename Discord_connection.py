@@ -1,5 +1,4 @@
 import discord
-import os
 
 import requests
 from colorthief import ColorThief
@@ -7,11 +6,13 @@ from colorthief import ColorThief
 from stonks import set_ticker
 
 client = discord.Client()
-list_commands = ["!add", "!dividend","!history", "!info", "!isin", "!list", "!remove"   ]
+list_commands = ["!add", "!dividend", "!history", "!info", "!isin", "!list", "!remove"]
+
 
 @client.event
 async def on_ready():
     print(f"{client.user} started")
+
 
 @client.event
 async def on_message(message):
@@ -21,14 +22,15 @@ async def on_message(message):
             return
 
         if message.content.startswith('!'):
-            if message.content.startswith("!commands"):         #fixme embeds implementeren (command met kleine uitleg)
+            if message.content.startswith("!commands"):         # fixme embeds implementeren (command met kleine uitleg)
                 embed = discord.Embed(
-                    title= 'Commands',
+                    title='Commands',
                     colour=discord.Colour.purple()
                 )
                 embed.add_field(name="!add {stonk}", value="add stonk to watchlist")
                 embed.add_field(name="!dividend {stonk}", value="returns the latest data regarding dividend")
-                embed.add_field(name="!history {stonk} {period}", value="returns summary of data from certain time frame")
+                embed.add_field(name="!history {stonk} {period}", value="returns summary of data from "
+                                                                        "certain time frame")
                 embed.add_field(name="!info {stonk}", value="returns a short summary of the stonk")
                 embed.add_field(name="!isin {stonk}", value="returns ISIN number")
                 embed.add_field(name="!list", value="returns list of stonks on watchlist")
@@ -36,7 +38,6 @@ async def on_message(message):
                 embed.set_footer(text="FIXME add github repo link")
 
                 await message.channel.send(embed=embed)
-
 
             elif message.content.startswith("!info"):
 
@@ -49,7 +50,8 @@ async def on_message(message):
                     embed = discord.Embed(
                         title=f"{response['name']}",
                         description=f"{response['short summary']}",
-                        colour= discord.Colour.from_rgb(dominant_color[0], dominant_color[1], dominant_color[2])    #fIXME niet heel accuraat atm
+                        colour=discord.Colour.from_rgb(dominant_color[0], dominant_color[1], dominant_color[2])
+                        # fIXME niet heel accuraat atm
                     )
 
                     embed.set_thumbnail(url=response['logo'])
@@ -83,5 +85,5 @@ async def on_message(message):
         if message.content.startswith("$"):
             await message.channel.send("Test message")
 
-
+# fixme wanneer public repo, token weghalen!
 client.run("ODYwODQzMzcwOTIyNTA4MzA4.YOBI3Q.WZhUxJbW8OseQKZsQZm97n7kuuw")

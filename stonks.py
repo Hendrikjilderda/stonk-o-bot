@@ -1,14 +1,6 @@
-#fixme ticker kan nog beginnen met teken ipv letter
+# fixme ticker kan nog beginnen met teken ipv letter
 
-# basic stuff
-import pandas as pd
-import numpy as np
-import json
-
-# Stonks data
-import yfinance as yf
-
-#get commands
+# get commands
 from commands import *
 
 
@@ -21,25 +13,23 @@ def set_ticker(discord_input):
         command = discord_input
 
         if command[1:] == "info" or command[1:] == "financials" or command[1:] == "cashflow" or \
-        command[1:] == "dividend" or command[1:] == "isin" or command[1:] == "events":
+            command[1:] == "dividend" or command[1:] == "isin" or command[1:] == "events":
             return f"Too few or too many arguments. given: 1, should be 2."
 
         elif command[1:] == "history":
             return f"Too few or too many arguments. given: 1, should be 3."
 
-
         if command[1:] == "join":
-            check = join_daily_report()     #FIXME username toevoegen somehow?
+            check = join_daily_report()     # FIXME username toevoegen somehow?
             if check:
                 return f"FIXME added to the subscriber list"
             else:
                 return f"FIXME  already on subscriber list"
 
-
         elif command[1:] == "list":
-            list = get_ticker_list()
-            print(list)
-            return list
+            watch_list = get_ticker_list()
+            print(watch_list)
+            return watch_list
 
         elif command[1:] == "leave":
             check = leave_daily_report()
@@ -56,13 +46,9 @@ def set_ticker(discord_input):
             else:
                 daily_report()
 
-
-
-
     else:
         command = temp[0]
         input_ticker = temp[1]
-
 
         # set ticker
         if input_ticker[0] == '$':
@@ -80,7 +66,7 @@ def set_ticker(discord_input):
                 output = get_current(ticker)
                 return output
 
-        elif command[1:] == "financials":       #FIXME krijg empty dataframe
+        elif command[1:] == "financials":       # FIXME krijg empty dataframe
             if len(temp) != 2:
                 print(f"[bot] Too few or too many arguments. given: {len(temp)}, should be 2.")
                 return f"Too few or too many arguments. given: {len(temp)}, should be 2."
@@ -89,7 +75,7 @@ def set_ticker(discord_input):
                 print(f"[debug] {output}")
                 return output
 
-        elif command[1:] == "cashflow":         #FIXME krijg empty dataframe
+        elif command[1:] == "cashflow":         # FIXME krijg empty dataframe
             if len(temp) != 2:
                 print(f"[bot] Too few or too many arguments. given: {len(temp)}, should be 2.")
                 return f"Too few or too many arguments. given: {len(temp)}, should be 2."
@@ -152,7 +138,6 @@ def set_ticker(discord_input):
                     print(f"${ticker_name.upper()} already on watch list.")
                     return f"${ticker_name.upper()} already on watch list."
 
-
         elif command[1:] == "remove":
             if len(temp) != 2:
                 print(f"[bot] Too few or too many arguments. given: {len(temp)}, should be 2.")
@@ -169,7 +154,3 @@ def set_ticker(discord_input):
         else:
             print("[bot] invalid command")
             return f"{command} is a invalid command. \nuse !command for all available commands"
-
-
-
-
