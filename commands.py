@@ -51,7 +51,7 @@ def get_next_event(ticker):
     return ticker.calendar
 
 
-def daily_report():
+def daily_report():     # fixme werkt niet meer
     report = {"ticker": []}
     for x in ticker_list:
         ticker = yf.Ticker(f"{x}")
@@ -63,7 +63,7 @@ def daily_report():
         })
 
     with open("daily_report.txt", 'w') as f:
-        json.dump(daily_report, f, indent=4)
+        json.dump(daily_report,f, indent=4)
     print("finished daily report")
 
 

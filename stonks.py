@@ -60,10 +60,11 @@ def set_ticker(discord_input):
 
         if command[1:] == "info":
             if len(temp) != 2:
-                print(f"[bot] Too few or too many arguments. given: {len(temp)}, should be 2.")
+                # print(f"[bot] Too few or too many arguments. given: {len(temp)}, should be 2.")
                 return f"Too few or too many arguments. given: {len(temp)}, should be 2."
             else:
                 output = get_current(ticker)
+                print(output)
                 return output
 
         elif command[1:] == "financials":       # FIXME krijg empty dataframe
@@ -86,7 +87,7 @@ def set_ticker(discord_input):
 
         elif command[1:] == "dividend":
             if len(temp) != 2:
-                print(f"[bot] Too few or too many arguments. given: {len(temp)}, should be 2.")
+                # print(f"[bot] Too few or too many arguments. given: {len(temp)}, should be 2.")
                 return f"Too few or too many arguments. given: {len(temp)}, should be 2."
             else:
                 output = get_dividend(ticker)
@@ -95,7 +96,7 @@ def set_ticker(discord_input):
 
         elif command[1:] == "isin":
             if len(temp) != 2:
-                print(f"[bot] Too few or too many arguments. given: {len(temp)}, should be 2.")
+                # print(f"[bot] Too few or too many arguments. given: {len(temp)}, should be 2.")
                 return f"Too few or too many arguments. given: {len(temp)}, should be 2."
             else:
                 output = get_isin(ticker)
@@ -111,13 +112,17 @@ def set_ticker(discord_input):
                 print(f"[debug] {output}")
                 return output
 
+        # in file zetten en die aangeven. tabel werkt niet goed met grote waarden
+        # https://stackoverflow.com/questions/50860397/discord-py-bot-sending-file-to-discord-channel
+        # https://stackoverflow.com/questions/62591430/discord-py-sending-a-text-file-on-dm
+
         elif command[1:] == "history":
             if len(temp) != 3:
                 print(f"[bot] Too few or too many arguments. given: {len(temp)}, should be 3.")
                 return f"Too few or too many arguments. given: {len(temp)}, should be 3."
             else:
                 if temp[2] not in periods:
-                    print(f"invalid period: should be one of: {periods}.")
+                    print(f"invalid period: should be one of: {periods}.")  # fixme beter printen list
                     return f"invalid period: should be one of: {periods}."
 
                 else:
