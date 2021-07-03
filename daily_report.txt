@@ -1,0 +1,34 @@
+{
+    "ticker": [
+        {
+            "name": "Tesla, Inc.",
+            "previous close": 677.92,
+            "day low": 673.26,
+            "day high": 700
+        },
+        {
+            "name": "Apple Inc.",
+            "previous close": 137.27,
+            "day low": 137.745,
+            "day high": 140
+        },
+        {
+            "name": "AMC Entertainment Holdings, Inc",
+            "previous close": 54.22,
+            "day low": 47.77,
+            "day high": 53.25
+        },
+        {
+            "name": "Senseonics Holdings, Inc.",
+            "previous close": 3.5,
+            "day low": 3.38,
+            "day high": 3.7
+        },
+        {
+            "name": "Microvision, Inc.",
+            "previous close": 16.38,
+            "day low": 15.68,
+            "day high": 16.58
+        }
+    ]
+}
