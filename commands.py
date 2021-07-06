@@ -1,9 +1,14 @@
-import json
+import json, csv
+import pandas as pd
+from datetime import date
+
 
 import yfinance as yf
 
 user_list = []
-ticker_list = ["tsla", "aapl", "amc"]
+ticker_list = ["tsla", "aapl", "amc", "sens"]
+
+week_days = {"monday": 0, "tuesday": 1, "wednesday":2, "thursday": 3, "friday":4}
 
 
 def get_current(ticker):
@@ -51,21 +56,28 @@ def get_next_event(ticker):
     return ticker.calendar
 
 
-def daily_report():     # fixme werkt niet meer
-    report = {"ticker": []}
+def daily_report():
+    global ticker_list
+
+    report = []
     for x in ticker_list:
         ticker = yf.Ticker(f"{x}")
-        report["ticker"].append({
-            "name": ticker.info["shortName"],
-            "previous close": ticker.info["previousClose"],
-            "day high": ticker.info["dayHigh"],
-            "day low": ticker.info["dayLow"]
-        })
+        report.append({
+            'name': ticker.info["shortName"],
+            'previous close': ticker.info["previousClose"],
+            'day high': ticker.info["dayHigh"],
+            'day low': ticker.info["dayLow"]
 
-    with open("daily_report.txt", 'w') as f:
-        json.dump(daily_report,f, indent=4)
-    print("finished daily report")
+            })
 
+    df = pd.DataFrame(report)
+    df.to_excel(f'./daily-reports/report {date.today().weekday()}.xlsx', index=False)
+
+    print("[info] daily report updated")
+
+
+def get_daily_report(weekday):
+        return f'./daily-reports/report {week_days[weekday]}.xlsx'
 
 def get_ticker_list():
     return ticker_list

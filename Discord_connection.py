@@ -1,24 +1,32 @@
 import discord
 
 import requests
+
+import threading
+import schedule
+import time
+
 from colorthief import ColorThief
 
 from stonks import set_ticker
+from commands import *
 
+# fixme wanneer public repo, token weghalen!
 TOKEN = "ODYwODQzMzcwOTIyNTA4MzA4.YOBI3Q.WZhUxJbW8OseQKZsQZm97n7kuuw"
+LIST_COMMANDS = ["!add", "!daily", "!dividend", "!history", "!info", "!isin", "!list", "!remove"]
 
 client = discord.Client()
-list_commands = ["!add", "!dividend", "!history", "!info", "!isin", "!list", "!remove"]
 
+# FIXME readme schrijven
 
 @client.event
 async def on_ready():
-    print("+***********************************+")
+    print("\n+***********************************+")
     print(f"*       Bot Name: {client.user.name}       *")
     print(f"*     Bot ID: {client.user.id}    *")
     print(f"*       Discord Version: {discord.__version__}      *")
-    print("+***********************************+")
-    print("[info] start up complete\n")
+    print("+***********************************+\n")
+    print("[info] start up complete")
 
 @client.event
 async def on_message(message):
@@ -46,6 +54,13 @@ async def on_message(message):
                 embed.set_footer(text="https://github.com/Hendrikjilderda/stonk-o-bot")
 
                 await message.channel.send(embed=embed)
+
+            elif message.content.startswith("!daily"):
+                response = set_ticker(message.content)
+
+                await message.channel.send(file=discord.File(response))
+
+
 
             elif message.content.startswith("!info"):
 
@@ -93,5 +108,24 @@ async def on_message(message):
         if message.content.startswith("$"):
             await message.channel.send("Test message")
 
-# fixme wanneer public repo, token weghalen!
-client.run(TOKEN)
+
+def daily():
+    daily_report()
+    schedule.every().day.at("22:30").do(daily_report)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(60)
+
+
+def main():
+    daily_report_thread = threading.Thread(target=daily)
+    daily_report_thread.daemon = True
+    daily_report_thread.start()
+    print("[info] daily report thread started")
+
+    client.run(TOKEN)
+
+
+if __name__ == "__main__":
+    main()

@@ -4,6 +4,7 @@
 from commands import *
 
 
+
 periods = ["1d", "5d", "1mo", "3mo", "6mo", "1y", "2y", "5y", "10y", "ytd", "max"]
 
 
@@ -38,13 +39,7 @@ def set_ticker(discord_input):
             else:
                 return f"FIXME not on subscriber list"
 
-        # temp functie om daily report te simuleren
-        elif command[1:] == "daily":
-            if len(temp) != 1:
-                print(f"[bot] Too few or too many arguments. given: {len(temp)}, should be 1.")
-                return f"Too few or too many arguments. given: {len(temp)}, should be 1."
-            else:
-                daily_report()
+
 
     else:
         command = temp[0]
@@ -75,6 +70,17 @@ def set_ticker(discord_input):
                 output = get_fincancials(ticker)
                 print(f"[debug] {output}")
                 return output
+
+        elif command[1:] == "daily":
+            if len(temp) != 2:
+                print(f"[bot] Too few or too many arguments. given: {len(temp)}, should be 2.")
+                return f"Too few or too many arguments. given: {len(temp)}, should be 2."
+            else:
+                if temp[1].lower() in week_days.keys():
+                    return get_daily_report(temp[1].lower())
+
+                else:
+                    return f"Incorrect argument"
 
         elif command[1:] == "cashflow":         # FIXME krijg empty dataframe
             if len(temp) != 2:
@@ -111,10 +117,6 @@ def set_ticker(discord_input):
                 output = get_next_event(ticker)
                 print(f"[debug] {output}")
                 return output
-
-        # in file zetten en die aangeven. tabel werkt niet goed met grote waarden
-        # https://stackoverflow.com/questions/50860397/discord-py-bot-sending-file-to-discord-channel
-        # https://stackoverflow.com/questions/62591430/discord-py-sending-a-text-file-on-dm
 
         elif command[1:] == "history":
             if len(temp) != 3:
@@ -159,3 +161,6 @@ def set_ticker(discord_input):
         else:
             print("[bot] invalid command")
             return f"{command} is a invalid command. \nuse !command for all available commands"
+
+
+
