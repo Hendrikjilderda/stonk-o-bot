@@ -1,4 +1,5 @@
 import discord
+from discord.ext import commands, tasks
 
 import requests
 
@@ -8,7 +9,7 @@ import time
 
 from colorthief import ColorThief
 
-from stonks import set_ticker
+from stonks import *
 from commands import *
 
 # fixme wanneer public repo, token weghalen!
@@ -51,6 +52,7 @@ async def on_message(message):
                 embed.add_field(name="!isin {stonk}", value="returns ISIN number")
                 embed.add_field(name="!list", value="returns list of stonks on watchlist")
                 embed.add_field(name="!remove {stonk}", value="removes stonk form watchlist")
+                embed.add_field(name="!daily {weekday}", value="gives daily report from that day")
                 embed.set_footer(text="https://github.com/Hendrikjilderda/stonk-o-bot")
 
                 await message.channel.send(embed=embed)
@@ -58,9 +60,17 @@ async def on_message(message):
             elif message.content.startswith("!daily"):
                 response = set_ticker(message.content)
 
+                for x in range(0, len(ticker_list)):
+                    embed = discord.Embed(
+                        title=f"{report[x]['name']}",
+                        colour=discord.Colour.purple()
+                    )
+                    embed.add_field(name='previous close', value=f"${report[x]['previous close']}", inline=True)
+                    embed.add_field(name='day high', value=f"${report[x]['day high']}", inline=True)
+                    embed.add_field(name='day low', value=f"${report[x]['day low']}", inline=True)
+                    await message.channel.send(embed=embed)
+
                 await message.channel.send(file=discord.File(response))
-
-
 
             elif message.content.startswith("!info"):
 
@@ -107,6 +117,22 @@ async def on_message(message):
 
         if message.content.startswith("$"):
             await message.channel.send("Test message")
+
+
+def automatic_daily_report(report, ticker_list):
+
+    channel = client.get_channel(860842837494464512)
+
+    for x in range(0, len(ticker_list)):
+        embed = discord.Embed(
+            title=f"{report[x]['name']}",
+            colour=discord.Colour.purple()
+        )
+        embed.add_field(name='previous close', value=f"${report[x]['previous close']}", inline=True)
+        embed.add_field(name='day high', value=f"${report[x]['day high']}", inline=True)
+        embed.add_field(name='day low', value=f"${report[x]['day low']}", inline=True)
+        channel.send(embed=embed)
+
 
 
 def daily():
