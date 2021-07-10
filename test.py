@@ -9,27 +9,20 @@ import random
 import discord
 from discord.ext import commands
 
-from datetime import datetime
-
 from help import *
 from commands import *
 bot = commands.Bot(command_prefix='!')
 
-TOKEN = "ODYwODQzMzcwOTIyNTA4MzA4.YOBI3Q.V0Dcv5OxSlTxR_Txjxg9RwFCHKc"
-startup_time = ''
+TOKEN = "ODYwODQzMzcwOTIyNTA4MzA4.YOBI3Q.WZhUxJbW8OseQKZsQZm97n7kuuw"
 
 @bot.event
 async def on_ready():
-    global startup_time
-    startup_time = datetime.now().strftime('%H:%M:%S')
-    print("\n#***************************************************#")
-    print(f"*               Bot Name: {bot.user.name}               *")
-    print(f"*            Bot ID: {bot.user.id}             *")
-    print(f"*               Discord Version: {discord.__version__}              *")
-    print(f"*               start time: {startup_time}                *")
-    print(f"*                                                   * ")
-    print(f"*  https://github.com/Hendrikjilderda/stonk-o-bot   * ")
-    print("#***************************************************#\n")
+    print("\n+***********************************+")
+    print(f"* https://github.com/Hendrikjilderda/stonk-o-bot * ")
+    print(f"*       Bot Name: {bot.user.name}       *")
+    print(f"*     Bot ID: {bot.user.id}    *")
+    print(f"*       Discord Version: {discord.__version__}      *")
+    print("+***********************************+\n")
     print("[info] start up complete")
 
 
@@ -120,9 +113,9 @@ async def remove(ctx, ticker_name):
         print(f"${ticker_name.upper()} not on watch list.")
         await ctx.send(f"${ticker_name.upper()} not on watch list.")
 
-bot.run(os.getenv("TOKEN"))
+bot.run(TOKEN)
 
-# https://www.javaer101.com/en/article/40873438.html
+
 def automatic_daily_report(report, ticker_list):
 
     channel = bot.get_channel(860842837494464512)
