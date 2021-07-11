@@ -6,11 +6,11 @@ A [docker image](https://hub.docker.com/repository/docker/hendrikjilderda/stonk-
 This is one of my python projects. If you have any useful tips feel free to leave them behind!
 
 ## Table of Contents
-* [General Info](#GeneralInfo)
+* [General Info](#General-Info)
 * [setup](#Setup)
 * [Usage](#Usage)
 * [Screenshots](#Screenshots)
-* [Project Status](#ProjectStatus)
+* [Project Status](#Project-Status)
 
 
 ## General Info 
