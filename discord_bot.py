@@ -1,15 +1,7 @@
 # FIXME readme schrijven
-# fixme wanneer public repo, token weghalen!
 
 # https://medium.com/@chaoren/how-to-timeout-in-python-726002bf2291
 # FIXME ^^ usable for timeouts and checking if data can actually be retrieved
-
-# FIXME functies uit comamdns.py werken niet meer...
-
-
-
-
-
 
 import os
 import sys
@@ -212,8 +204,8 @@ async def remove(ctx, ticker_name):
         print(f"[error] {sys.exc_info()}")
 
 
-#bot.run(os.getenv("TOKEN"))
-bot.run(TOKEN)
+bot.run(os.getenv("TOKEN"))
+# bot.run(TOKEN)
 
 
 # https://www.javaer101.com/en/article/40873438.html
