@@ -6,14 +6,14 @@ A [docker image](https://hub.docker.com/repository/docker/hendrikjilderda/stonk-
 This is one of my python projects. If you have any useful tips feel free to leave them behind!
 
 ## Table of Contents
-* [General Info](#General Info)
+* [General Info](#GeneralInfo)
 * [setup](#Setup)
 * [Usage](#Usage)
 * [Screenshots](#Screenshots)
-* [Project Status](#Project Status)
+* [Project Status](#ProjectStatus)
 
 
-## General Info
+## General Info 
 This Discord bot uses yfinance to import stock data into discord. 
 Inside a discord channel you can use commands to retrieve certain data from a stock. 
 All commands are explained in the [Commands](#Commands) section.
@@ -22,19 +22,19 @@ All commands are explained in the [Commands](#Commands) section.
 This bot uses the following libraries. These libraries can be installed using pip.
 
 Alternatively the requirements.txt can be used. However, not all the packages from this file are used.
-* ###os
+* ### os
   Is used for the environment variable in the docker image.
-* ###sys
+* ### sys
   Is used for the error handling
-* ###discord
+* ### discord
   Is used for implementing the commands
-* ###discord.ext
+* ### discord.ext
   Is used together with discord for implementing the commands
-* ###yfinance
+* ### yfinance
   Is used for retreiving the data from Yahoo Finance
-* ###datetime 
+* ### datetime 
   Is used for basic time 
-* ###colorthief
+* ### colorthief
   Is used for coloring the embed 
 
 
